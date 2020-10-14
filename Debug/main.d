@@ -20,6 +20,7 @@ main.obj: C:/ti/ccs1011/ccs/ccs_base/arm/include/CMSIS/cmsis_compiler.h
 main.obj: C:/ti/ccs1011/ccs/ccs_base/arm/include/CMSIS/cmsis_ccs.h
 main.obj: C:/ti/ccs1011/ccs/ccs_base/arm/include/system_msp432p401r.h
 main.obj: ../init.h
+main.obj: ../timer.h
 
 ../main.c: 
 C:/ti/ccs1011/ccs/ccs_base/arm/include/msp.h: 
@@ -41,3 +42,4 @@ C:/ti/ccs1011/ccs/ccs_base/arm/include/CMSIS/cmsis_compiler.h:
 C:/ti/ccs1011/ccs/ccs_base/arm/include/CMSIS/cmsis_ccs.h: 
 C:/ti/ccs1011/ccs/ccs_base/arm/include/system_msp432p401r.h: 
 ../init.h: 
+../timer.h: 

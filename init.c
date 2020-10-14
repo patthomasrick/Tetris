@@ -21,7 +21,7 @@ void ConfigureButtonsAsInput(){
     P6IES = (BIT7 | BIT6 | BIT5 | BIT4 | BIT1 | BIT0);
 }
 
-void EnablePinsAsOutputs(){
+void EnablePinsAsOutput(){
     // Set Ports 1,2,4,5 as outputs
     P1DIR = (BIT7 | BIT6 | BIT5 | BIT4 | BIT3 | BIT2 | BIT1 | BIT0);
     P2DIR = (BIT7 | BIT6 | BIT5 | BIT4 | BIT3 | BIT2 | BIT1 | BIT0);
