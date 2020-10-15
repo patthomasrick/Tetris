@@ -6,3 +6,6 @@ MCU User Guide --> https://www.ti.com/lit/ug/slau356i/slau356i.pdf?ts=1602629577
 MCU Datasheet  --> https://www.ti.com/lit/ds/symlink/msp432p401r.pdf?HQS=TI-null-null-digikeymode-df-pf-null-wwe&ts=1602629485781
 
 Code developed in Code Composer Studio v10
+
+Register Names and Mask Names defined here in includes directory\ --> "msp432p401r.h" and "msp432p401r_classic.h"
+Interrupts defined here --> "startup_msp432p401r_ccs.c"
