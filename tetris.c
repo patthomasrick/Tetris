@@ -12,7 +12,7 @@
 
 const char id_to_piece_string[] = "IOTSZLJ";
 
-void init_piece(Piece *piece)
+void piece_init(Piece *piece)
 {
     piece->piece_num = rand() % 7;
     piece->state = 0;
@@ -53,7 +53,7 @@ void init_piece(Piece *piece)
     }
 }
 
-void tetris_init(Tetris *tetris, Piece *piece)
+void tetris_init(Tetris *tetris)
 {
     unsigned int r, c;
     for (r = 0; r < GAME_HEIGHT; r++)
@@ -73,7 +73,7 @@ void tetris_init(Tetris *tetris, Piece *piece)
     for (i = 0; i < 6; i++)
     {
         Piece p;
-        init_piece(&p);
+        piece_init(&p);
         tetris_queue_enqueue(tetris, &p);
     }
     tetris->end_game = false;
@@ -104,7 +104,7 @@ bool piece_rotate(Piece *piece, Tetris *tetris)
     return true;
 }
 
-bool piece_in_bounds(Piece *piece, Tetris *tetris, int new_state)
+bool piece_in_bounds(Piece *piece, Tetris *tetris, unsigned char new_state)
 {
     StateUnion state_union;
     state_union.state = piece->states[new_state];
@@ -126,7 +126,7 @@ bool piece_in_bounds(Piece *piece, Tetris *tetris, int new_state)
 
 bool tetris_shift_down(Tetris *tetris)
 {
-    Piece* piece = tetris_queue_get(tetris);
+    Piece *piece = tetris_queue_get(tetris);
     StateUnion state_union;
     state_union.state = piece->states[piece->state];
     int i;
@@ -150,7 +150,7 @@ bool tetris_shift_down(Tetris *tetris)
 
 bool tetris_move_left(Tetris *tetris)
 {
-    Piece* piece = tetris_queue_get(tetris);
+    Piece *piece = tetris_queue_get(tetris);
     StateUnion state_union;
     state_union.state = piece->states[piece->state];
     int i;
@@ -168,7 +168,7 @@ bool tetris_move_left(Tetris *tetris)
 
 bool tetris_move_right(Tetris *tetris)
 {
-    Piece* piece = tetris_queue_get(tetris);
+    Piece *piece = tetris_queue_get(tetris);
     StateUnion state_union;
     state_union.state = piece->states[piece->state];
     int i;
@@ -176,7 +176,8 @@ bool tetris_move_right(Tetris *tetris)
     {
         Point *p = &state_union.points[i];
         if (tetris->board[p->x + tetris->row][p->y + tetris->col + 1] ==
-                OCCUPIED || p->y + tetris->col >= (GAME_WIDTH - 1))
+                OCCUPIED ||
+            p->y + tetris->col >= (GAME_WIDTH - 1))
         {
             return false;
         }
@@ -187,7 +188,7 @@ bool tetris_move_right(Tetris *tetris)
 
 void tetris_place_piece(Tetris *tetris)
 {
-    Piece* piece = tetris_queue_get(tetris);
+    Piece *piece = tetris_queue_get(tetris);
     StateUnion state_union;
     state_union.state = piece->states[piece->state];
     int i;
@@ -203,7 +204,7 @@ void tetris_place_piece(Tetris *tetris)
 
 void tetris_visualize(Tetris *tetris)
 {
-    Piece* piece = tetris_queue_get(tetris);
+    Piece *piece = tetris_queue_get(tetris);
     StateUnion state_union;
     state_union.state = piece->states[piece->state];
     int i, j;
@@ -213,34 +214,34 @@ void tetris_visualize(Tetris *tetris)
         tetris->board[p->x + tetris->row][p->y + tetris->col] = OCCUPIED;
     }
 
-//    for (i = 0; i < GAME_HEIGHT; i++)
-//    {
-//        for (j = 0; j < GAME_WIDTH; j++)
-//        {
-//            printf(tetris->board[i][j]);
-//            printf(" ");
-//        }
-//        printf("\n");
-//    }
-//    printf("\n");
+    //    for (i = 0; i < GAME_HEIGHT; i++)
+    //    {
+    //        for (j = 0; j < GAME_WIDTH; j++)
+    //        {
+    //            printf(tetris->board[i][j]);
+    //            printf(" ");
+    //        }
+    //        printf("\n");
+    //    }
+    //    printf("\n");
 
     for (i = 0; i < 4; i++)
     {
         Point *p = &state_union.points[i];
         tetris->board[p->x + tetris->row][p->y + tetris->col] = EMPTY;
     }
-//    printf("Score: %d\n", score);
-//    printf("Next Pieces: ");
-//    for (list<Piece>::iterator it = piece_queue.begin(); it != piece_queue.end(); it++)
-//    {
-//        if (!(it == piece_queue.begin()))
-//        {
-//            int num = ((*it).piece_num);
-//            printf(id_to_piece_string[num]);
-//            printf(" ");
-//        }
-//    }
-//    printf("\n");
+    //    printf("Score: %d\n", score);
+    //    printf("Next Pieces: ");
+    //    for (list<Piece>::iterator it = piece_queue.begin(); it != piece_queue.end(); it++)
+    //    {
+    //        if (!(it == piece_queue.begin()))
+    //        {
+    //            int num = ((*it).piece_num);
+    //            printf(id_to_piece_string[num]);
+    //            printf(" ");
+    //        }
+    //    }
+    //    printf("\n");
     return;
 }
 
@@ -254,7 +255,7 @@ void tetris_spawn_piece(Tetris *tetris)
     piece_init(&p);
     tetris_queue_enqueue(tetris, &p);
 
-    Piece* piece = tetris_queue_get(tetris);
+    Piece *piece = tetris_queue_get(tetris);
     StateUnion state_union;
     state_union.state = piece->states[piece->state];
     int i;

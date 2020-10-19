@@ -17,6 +17,7 @@ unsigned int rand()
     return __seed;
 }
 
-void srand(unsigned int seed) {
+void srand(unsigned int seed)
+{
     __seed = seed;
 }
